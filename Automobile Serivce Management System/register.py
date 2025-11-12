@@ -18,7 +18,7 @@ try:
     conn = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="sudosu",  # ✅ same as you used in terminal
+        password="sudosu",
         database="sysrec"
     )
     print("✅ Database connected successfully!")
