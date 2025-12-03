@@ -1,20 +1,63 @@
 import pyfiglet
+import db_helper
+
+# ----------- COLOR CODES -------------
+RED = "\033[91m"
+GREEN = "\033[92m"
+YELLOW = "\033[93m"
+BLUE = "\033[94m"
+MAGENTA = "\033[95m"
+CYAN = "\033[96m"
+WHITE = "\033[97m"
+GREY = "\033[90m"
+RESET = "\033[0m"
+# ------------------------------------
+
+def style_line(text):
+    styled = ""
+    for ch in text:
+        if ch == "#":
+            styled += MAGENTA + ch
+        elif ch == "-":
+            styled += GREEN + ch
+        else:
+            styled += YELLOW + ch
+    styled += RESET
+    return styled
 
 
-def main():
-    text = pyfiglet.print_figlet(text = "Service  View", colors = "YELLOW", width = 100)
+def main(customer_id=None):
+    db_helper.ensure_tables()
+    print("\n" * 2)
+    pyfiglet.print_figlet(text = "Service View", colors = "YELLOW", width = 100)
     print("\n" * 2)
 
-#user_auth
+    print(style_line("#" * 100))
+    print(f"{YELLOW}View My Service Records{RESET}")
+    print(style_line("#" * 100))
 
-print(" Security Authentication")
-print(" Please verify your identity")
-vri_id = input(char(" Enter user ID:")
-vri_pss = input(char(" Enter Password:")
+    if customer_id is None:
+        name = input("Enter your name: ")
+        password = input("Enter your password: ")
+        user = db_helper.get_user_by_name_password(name, password)
+        if not user:
+            print("Invalid credentials.")
+            return
+        customer_id = user.get('CUSTOMER_ID')
 
-def check():
-    if vri_id == user_id:
-    ver_pss == user_pss
-    break
-elif:
-    print(" Please enter Correct Credentials")
+    services = db_helper.get_services_for_customer(customer_id)
+    if not services:
+        print("No past services found for this account.")
+        return
+
+    for s in services:
+        svc_date = s.get('SERVICE_DATE')
+        desc = s.get('SERVICE_DESC')
+        vid = s.get('VEHICLE_ID')
+        brand = s.get('BRAND') or ''
+        model = s.get('MODEL') or ''
+        print(style_line("-" * 80))
+        print(f"Service ID: {s.get('SERVICE_ID')}  Date: {svc_date}")
+        print(f"Vehicle: [{vid}] {brand} {model}")
+        print(f"Details: {desc}")
+    print(style_line("-" * 80))

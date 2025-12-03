@@ -1,5 +1,5 @@
 import pyfiglet
-import mysql.connector
+import db_helper
 
 # ----------- COLOR CODES -------------
 RED = "\033[91m"
@@ -13,34 +13,7 @@ GREY = "\033[90m"
 RESET = "\033[0m"
 # ------------------------------------
 
-# ----------- MYSQL CONNECTION ----------
-try:
-    conn = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="sudosu",
-        database="sysrec"
-    )
-    print("✅ Database connected successfully!")
-
-except mysql.connector.Error as err:
-    print("❌ Database connection failed:", err)
-# --------------------------------------
-def connect_db():
-    try:
-        conn = mysql.connector.connect(
-            host="localhost",
-            user="root",                 
-            password="sudosu",  
-            database="sysrec",
-            port=3306
-        )
-        cursor = conn.cursor()
-        return conn, cursor
-    except mysql.connector.Error as err:
-        print(f"{RED}Database connection failed: {err}{RESET}")
-        return None, None
-# --------------------------------------
+db_helper.ensure_tables()
 
 def style_line(text):
     styled = ""
@@ -74,24 +47,13 @@ def display_registration(NAME, AGE, EMAIL, PHONE, ADDRESS):
     print("\n")
 
 
-def save_to_database(NAME, AGE, EMAIL, PHONE, ADDRESS):
-    conn, cursor = connect_db()
-    if conn is None:
-        return
-
-    try:
-        query = """
-        INSERT INTO rec (CUSTOMER_NAME, AGE, EMAIL, PHONE, ADDRESS)
-        VALUES (%s, %s, %s, %s, %s)
-        """
-        cursor.execute(query, (NAME, AGE, EMAIL, PHONE, ADDRESS))
-        conn.commit()
-        print(f"{GREEN}✅ Registration data saved successfully!{RESET}")
-    except mysql.connector.Error as err:
-        print(f"{RED}❌ Failed to insert record: {err}{RESET}")
-    finally:
-        cursor.close()
-        conn.close()
+def save_to_database(NAME, AGE, EMAIL, PHONE, ADDRESS, PASSWORD):
+    customer_id = db_helper.insert_user(NAME, AGE, EMAIL, PHONE, ADDRESS, PASSWORD)
+    if customer_id:
+        print(f"{GREEN}✅ Registration data saved successfully! Your ID: {customer_id}{RESET}")
+    else:
+        print(f"{RED}❌ Failed to save registration data.{RESET}")
+    return customer_id
 
 
 def menu_box(text):
@@ -113,9 +75,23 @@ def main():
     EMAIL = input("Enter your email: ")
     PHONE = input("Enter your phone number: ")
     ADDRESS = input("Enter your address: ")
+    PASSWORD = input("Choose a password (store securely): ")
 
     display_registration(NAME, AGE, EMAIL, PHONE, ADDRESS)
-    save_to_database(NAME, AGE, EMAIL, PHONE, ADDRESS)
+    cust_id = save_to_database(NAME, AGE, EMAIL, PHONE, ADDRESS, PASSWORD)
+
+    # Ask to add a vehicle now
+    if cust_id:
+        add = input("Would you like to add a vehicle now? (y/n): ").strip().lower()
+        if add == 'y':
+            brand = input("Vehicle brand: ")
+            model = input("Vehicle model: ")
+            year = input("Vehicle year: ")
+            vid = db_helper.insert_vehicle(cust_id, brand, model, year)
+            if vid:
+                print(f"{GREEN}Vehicle added (ID: {vid}){RESET}")
+            else:
+                print(f"{RED}Failed to add vehicle.{RESET}")
 
     print(menu_box("[1] Add a vehicle"))
     print(menu_box("[2] Log Service Visit"))
