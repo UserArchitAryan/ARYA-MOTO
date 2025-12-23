@@ -38,7 +38,7 @@ def main():
     print(style_line("#" * 100))
     print(f"""
 {GREEN}ARYA-MOTO stands for:{RESET}
-  {CYAN}A{RESET}utomatic
+  {CYAN}A{RESET}utomated
   {CYAN}R{RESET}esource
   {CYAN}Y{RESET}ard for
   {CYAN}A{RESET}utomobiles – 

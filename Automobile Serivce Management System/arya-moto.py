@@ -1,7 +1,7 @@
 #-------------------------------------------------------------------------Automobile management system----------------------------------------------------------------------#
 #---------------------------------------------------------------------------------Welcome Page------------------------------------------------------------------------------#
 #================================================================================# ARYA-MOTO #==============================================================================#
-#----------------------------------------------#(Automatic Resource Yard for Automobiles – Management of Terminal Operations)#----------------------------------------------#
+#----------------------------------------------#(Automated Resource Yard for Automobiles – Management of Terminal Operations)#----------------------------------------------#
 
 import pyfiglet
 
@@ -35,7 +35,7 @@ def style_line(text):
 print(style_line("#--------------------------------------------------------------------Automobile Service management system-------------------------------------------------------------------#"))
 print(style_line("#---------------------------------------------------------------------------------Welcome Page------------------------------------------------------------------------------#"))
 print(style_line("#================================================================================# ARYA-MOTO #==============================================================================#"))
-print(style_line("#----------------------------------------------#(Automatic Resource Yard for Automobiles – Management of Terminal Operations)#----------------------------------------------#"))
+print(style_line("#----------------------------------------------#(Automated Resource Yard for Automobiles – Management of Terminal Operations)#----------------------------------------------#"))
 
 #print(style_line("#--------------------------------------------------------------------------Automobile management system-----------------------------------------------------------------------#", "\n" ,"#---------------------------------------------------------------------------------Welcome Page------------------------------------------------------------------------------#", "\n" ,"#================================================================================# ARYA-MOTO #==============================================================================#", "\n" ,"#----------------------------------------------#(Automatic Resource Yard for Automobiles – Management of Terminal Operations)#----------------------------------------------#"))
 
@@ -45,7 +45,7 @@ print("\n" * 5)
 print(style_line("........................................................................................................................................................................."))
 print("\n")
 
-print("\t" * 4 ,"Welcome to ARYA-MOTO, the Automatic Resource Yard for Automobiles – Management of Terminal Operations!")
+print("\t" * 4 ,"Welcome to ARYA-MOTO, the Automated Resource Yard for Automobiles – Management of Terminal Operations!")
 print("\t" * 4 ,"This system is designed to streamline the management of automobile resources and terminal operations.")
 print("\t" * 4 ,"Please follow the instructions provided in the system to navigate through the various functionalities.")
 print("\n")
