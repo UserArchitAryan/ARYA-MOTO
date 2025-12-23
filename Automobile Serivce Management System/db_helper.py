@@ -18,7 +18,7 @@ def connect_db():
         cursor = conn.cursor(dictionary=True)
         return conn, cursor
     except mysql.connector.Error as err:
-        print("❌ Database connection failed:", err)
+        print("Database connection failed:", err)
         return None, None
 
 

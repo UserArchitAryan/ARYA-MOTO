@@ -50,9 +50,9 @@ def display_registration(NAME, AGE, EMAIL, PHONE, ADDRESS):
 def save_to_database(NAME, AGE, EMAIL, PHONE, ADDRESS, PASSWORD):
     customer_id = db_helper.insert_user(NAME, AGE, EMAIL, PHONE, ADDRESS, PASSWORD)
     if customer_id:
-        print(f"{GREEN}✅ Registration data saved successfully! Your ID: {customer_id}{RESET}")
+        print(f"{GREEN} Registration data saved successfully! Your ID: {customer_id}{RESET}")
     else:
-        print(f"{RED}❌ Failed to save registration data.{RESET}")
+        print(f"{RED}Failed to save registration data.{RESET}")
     return customer_id
 
 

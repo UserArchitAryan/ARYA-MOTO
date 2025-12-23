@@ -42,7 +42,8 @@ def main():
   {CYAN}R{RESET}esource
   {CYAN}Y{RESET}ard for
   {CYAN}A{RESET}utomobiles – 
-  {CYAN}M{RESET}anagement of
+  {CYAN}M{RESET}anagement
+  {CYAN}O{RESET}f
   {CYAN}T{RESET}erminal
   {CYAN}O{RESET}perations
 
