@@ -93,7 +93,7 @@ welcome_box()
 print("\n"*2)
 
 def menu_box(text):
-    screen_width = 128  
+    screen_width = 128
     RED = "\033[91m"
     RESET = "\033[0m"
 
