@@ -1,7 +1,7 @@
 # ARYA-MOTO
 
 
-ARYA-MOTO is a terminal-based Automobile Service Management System created in Python, designed with a focus on **ASCII aesthetics**, **modularity**, and **Linux CLI spirit**.  
+ARYA-MOTO is a Automobile Service Management System created in Python, designed with a focus on **ASCII aesthetics**, **modularity**, and **Linux CLI spirit**.  
 It operates entirely from the terminal, making it lightweight, minimal, and perfect for retro hacker-style environments.
 
 ---
